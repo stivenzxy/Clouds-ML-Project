@@ -1,6 +1,0 @@
-Epoch 1/1
-Train Loss: 0.9111 | Val Loss: 1.3291
-F1 Macro: 0.5937 | F1 Weighted: 0.5885
-Mejor modelo (F1: 0.5937) guardado en best_model_MobileNet3_fold2.pth
-Training: 100%|##########| 4/4 [00:09<00:00,  2.44s/it]
-Validation: 100%|##########| 4/4 [00:02<00:00,  1.47it/s]

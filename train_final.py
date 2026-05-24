@@ -120,8 +120,6 @@ def main():
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Dispositivo: {device}")
-    if device.type == 'cuda':
-        print(f"GPU: {torch.cuda.get_device_name(0)}")
 
     # ---- Datos ----
     train_df = pd.read_csv('data/train_split.csv')

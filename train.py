@@ -124,8 +124,6 @@ def main():
     # ---- Configuración general ----
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Dispositivo: {device}")
-    if device.type == 'cuda':
-        print(f"GPU: {torch.cuda.get_device_name(0)}")
 
     batch_size_train = 32   # Si se produce CUDA OOM, bajar a 24 o 16.
     batch_size_val = 64     # En validación no hay backward -> entra más imagen.
