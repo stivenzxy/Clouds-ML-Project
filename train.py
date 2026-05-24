@@ -27,6 +27,7 @@ os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 os.environ.setdefault('WANDB_MODE', 'offline')
 
 import random
+import time
 import numpy as np
 import pandas as pd
 import torch
@@ -157,6 +158,7 @@ def main():
 
         for fold, (train_idx, val_idx) in enumerate(mskf.split(full_train_df, labels_arr)):
             print(f"\n--- Fold {fold + 1}/2 ---")
+            fold_start = time.time()
 
             wandb.init(
                 project="proyecto-nubes",
@@ -213,9 +215,17 @@ def main():
 
             for epoch in range(epochs):
                 print(f"\nEpoch {epoch + 1}/{epochs}")
-                train_loss = train_one_epoch(model, train_loader, criterion, optimizer, scaler, device)
-                val_loss, f1_m, f1_w = validate(model, val_loader, criterion, device)
+                epoch_start = time.time()
 
+                t_train_start = time.time()
+                train_loss = train_one_epoch(model, train_loader, criterion, optimizer, scaler, device)
+                t_train = time.time() - t_train_start
+
+                t_val_start = time.time()
+                val_loss, f1_m, f1_w = validate(model, val_loader, criterion, device)
+                t_val = time.time() - t_val_start
+
+                epoch_time = time.time() - epoch_start
                 current_lr = optimizer.param_groups[0]['lr']
 
                 wandb.log({
@@ -225,10 +235,14 @@ def main():
                     "f1_macro": f1_m,
                     "f1_weighted": f1_w,
                     "lr": current_lr,
+                    "epoch_time_sec": epoch_time,
+                    "train_time_sec": t_train,
+                    "val_time_sec": t_val,
                 })
 
                 print(f"  Train Loss: {train_loss:.4f} | Val Loss: {val_loss:.4f}")
                 print(f"  F1 Macro:  {f1_m:.4f}  | F1 Weighted: {f1_w:.4f}")
+                print(f"  Tiempo:    train {t_train:.1f}s | val {t_val:.1f}s | total {epoch_time:.1f}s")
 
                 # Guardamos el mejor checkpoint de cada fold según F1 macro.
                 if f1_m > best_f1_macro:
@@ -238,6 +252,8 @@ def main():
                     print(f"  ✓ Nuevo mejor F1 ({f1_m:.4f}) - checkpoint guardado: {model_path}")
 
             arch_f1_scores.append(best_f1_macro)
+            fold_time = time.time() - fold_start
+            print(f"\n  Fold {fold + 1} completado en {fold_time / 60:.1f} min — Mejor F1: {best_f1_macro:.4f}")
             wandb.finish()
 
             # Limpiar VRAM entre folds.
