@@ -1,0 +1,26 @@
+
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Epoch 1/5
+  Train Loss: 0.7620 | Val Loss: 0.6693
+  F1 Macro:  0.7323  | F1 Weighted: 0.7388
+  Tiempo:    train 69.7s | val 37.9s | total 107.6s
+  ✓ Nuevo mejor F1 (0.7323) - checkpoint guardado: best_model_MobileNetV3_fold1.pth
+Epoch 2/5
+  Train Loss: 0.6040 | Val Loss: 0.5827
+  F1 Macro:  0.7379  | F1 Weighted: 0.7429
+  Tiempo:    train 11.5s | val 14.7s | total 26.2s
+  ✓ Nuevo mejor F1 (0.7379) - checkpoint guardado: best_model_MobileNetV3_fold1.pth
+Epoch 3/5
+  Train Loss: 0.5815 | Val Loss: 0.5896
+  F1 Macro:  0.7272  | F1 Weighted: 0.7297
+  Tiempo:    train 12.0s | val 14.0s | total 26.0s
+Epoch 4/5
+  Train Loss: 0.5318 | Val Loss: 0.5660
+  F1 Macro:  0.7430  | F1 Weighted: 0.7488
+  Tiempo:    train 10.9s | val 12.0s | total 22.9s
+  ✓ Nuevo mejor F1 (0.7430) - checkpoint guardado: best_model_MobileNetV3_fold1.pth
+Epoch 5/5
+  Train Loss: 0.5202 | Val Loss: 0.5474
+  F1 Macro:  0.7307  | F1 Weighted: 0.7351
+  Tiempo:    train 10.1s | val 12.1s | total 22.2s
+  Fold 1 completado en 3.5 min — Mejor F1: 0.7430

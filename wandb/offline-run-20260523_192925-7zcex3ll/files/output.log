@@ -1,0 +1,7 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Training: 100%|##########| 4/4 [00:14<00:00,  3.68s/it]
+Validation: 100%|##########| 4/4 [00:02<00:00,  1.39it/s]
+Epoch 1/1
+Train Loss: 1.1058 | Val Loss: 1.1432
+F1 Macro: 0.5092 | F1 Weighted: 0.5794
+Mejor modelo (F1: 0.5092) guardado en best_model_MobileNet3_fold1.pth

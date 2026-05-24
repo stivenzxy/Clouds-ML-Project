@@ -163,6 +163,8 @@ def main():
             wandb.init(
                 project="proyecto-nubes",
                 name=f"{arch_name}-fold{fold + 1}",
+                group=arch_name,
+                job_type="train",
                 config={
                     "architecture": arch_name,
                     "fold": fold + 1,
@@ -176,7 +178,7 @@ def main():
                     "amp": True,
                     "seed": SEED,
                 },
-                reinit="finish_previous",
+                reinit=True,
             )
 
             train_df = full_train_df.iloc[train_idx].reset_index(drop=True)
@@ -282,17 +284,19 @@ def main():
     print("=" * 60)
 
     # Reporte agregado en W&B.
-    wandb.init(project="proyecto-nubes", name="cv-summary", reinit="finish_previous")
-    table = wandb.Table(columns=["Architecture", "F1 Macro Mean", "F1 Macro Std", "Fold 1", "Fold 2"])
+    wandb.init(project="proyecto-nubes", name="cv-summary", job_type="aggregate", reinit=True)
+    table = wandb.Table(columns=["Architecture", "F1 Macro (Mean ± Std)", "F1 Macro Mean", "F1 Macro Std", "Fold 1", "Fold 2"])
     for res in results:
+        mean_std_str = f"{res['F1 Macro (Mean)']:.4f} ± {res['F1 Macro (Std)']:.4f}"
         table.add_data(
             res["Architecture"],
+            mean_std_str,
             res["F1 Macro (Mean)"],
             res["F1 Macro (Std)"],
             res["Folds"][0],
             res["Folds"][1],
         )
-    wandb.log({"CV Summary": table})
+    wandb.log({"CV Summary Table": table})
     wandb.finish()
 
     print("\nValidación cruzada finalizada.")
