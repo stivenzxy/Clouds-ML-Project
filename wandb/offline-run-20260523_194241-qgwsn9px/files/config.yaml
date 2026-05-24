@@ -1,0 +1,88 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    python_version: 3.13.9
+    cli_version: 0.27.0
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1779583362
+    t:
+      1:
+      - 1
+      - 5
+      - 41
+      - 49
+      - 53
+      - 63
+      - 80
+      2:
+      - 1
+      - 5
+      - 41
+      - 49
+      - 53
+      - 63
+      - 80
+      3:
+      - 2
+      - 4
+      - 13
+      - 16
+      - 42
+      4: 3.13.9
+      5: 0.27.0
+      8:
+      - 3
+      10:
+      - 20
+      13: windows-amd64
+    e:
+      h3t47zebdfgx73lsijy5zvyi7nqv06ic:
+        os: Windows-11-10.0.26200-SP0
+        python: CPython 3.13.9
+        started_at: '2026-05-24T00:42:41.904914Z'
+        program: C:\Users\Alex\Documents\Proyecto_Nubes\train.py
+        code_path: train.py
+        code_path_local: train.py
+        git:
+          remote_url: https://github.com/SirAlex10/Proyecto_Nubes.git
+          commit: 94113bcb9ad424b930d0fa7069c3a4acf3625343
+        root: C:\Users\Alex\Documents\Proyecto_Nubes
+        host: AlexPC
+        executable: C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Scripts\python.exe
+        cpu_count: 8
+        cpu_count_logical: 16
+        gpu_type: NVIDIA GeForce RTX 5060
+        gpu_count: 1
+        disk:
+          /:
+            total: '1023181582336'
+            used: '651655135232'
+        memory:
+          total: '34281013248'
+        gpu_nvidia:
+        - name: NVIDIA GeForce RTX 5060
+          memory_total: '8546942976'
+          cuda_cores: 3840
+          architecture: Blackwell
+          uuid: GPU-713ed314-3d2b-55a2-3223-5cc1aa27687b
+        cuda_version: '13.2'
+        writer_id: h3t47zebdfgx73lsijy5zvyi7nqv06ic
+architecture:
+  desc: null
+  value: MobileNet3
+fold:
+  desc: null
+  value: 2
+learning_rate:
+  desc: null
+  value: 0.0001
+epochs:
+  desc: null
+  value: 5
+batch_size:
+  desc: null
+  value: 16

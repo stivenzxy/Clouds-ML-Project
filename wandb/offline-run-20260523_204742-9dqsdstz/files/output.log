@@ -1,0 +1,25 @@
+Epoch 1/5
+  Train Loss: 0.6386 | Val Loss: 0.5824
+  F1 Macro:  0.7345  | F1 Weighted: 0.7400
+  Tiempo:    train 85.3s | val 32.2s | total 117.5s
+  ✓ Nuevo mejor F1 (0.7345) - checkpoint guardado: best_model_DenseNet121_fold1.pth
+Epoch 2/5
+  Train Loss: 0.5541 | Val Loss: 0.5430
+  F1 Macro:  0.7416  | F1 Weighted: 0.7468
+  Tiempo:    train 107.1s | val 61.8s | total 168.9s
+  ✓ Nuevo mejor F1 (0.7416) - checkpoint guardado: best_model_DenseNet121_fold1.pth
+Epoch 3/5
+  Train Loss: 0.5253 | Val Loss: 0.5282
+  F1 Macro:  0.7488  | F1 Weighted: 0.7547
+  Tiempo:    train 158.3s | val 57.2s | total 215.6s
+  ✓ Nuevo mejor F1 (0.7488) - checkpoint guardado: best_model_DenseNet121_fold1.pth
+Epoch 4/5
+  Train Loss: 0.4995 | Val Loss: 0.5177
+  F1 Macro:  0.7582  | F1 Weighted: 0.7623
+  Tiempo:    train 153.6s | val 60.7s | total 214.3s
+  ✓ Nuevo mejor F1 (0.7582) - checkpoint guardado: best_model_DenseNet121_fold1.pth
+Epoch 5/5
+  Train Loss: 0.4866 | Val Loss: 0.5148
+  F1 Macro:  0.7455  | F1 Weighted: 0.7492
+  Tiempo:    train 153.0s | val 68.0s | total 221.1s
+  Fold 1 completado en 15.6 min — Mejor F1: 0.7582

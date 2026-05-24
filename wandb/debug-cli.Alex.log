@@ -1,0 +1,567 @@
+2026-05-23 21:55:00 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\run-pv4tsrq9.wandb
+2026-05-23 21:55:01 ERROR Error executing GraphQL.
+Traceback (most recent call last):
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\sdk\internal\internal_api.py", line 369, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\vendor\gql-0.2.0\wandb_gql\client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\vendor\gql-0.2.0\wandb_gql\client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\sdk\lib\gql_request.py", line 72, in execute
+    request.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\requests\models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://api.wandb.ai/graphql
+2026-05-23 21:55:01 ERROR The API key you provided is either invalid or missing.  If the `WANDB_API_KEY` environment variable is set, make sure it is correct. Otherwise, to resolve this issue, you may try running the 'wandb login --relogin' command. If you are using a local server, make sure that you're using the correct hostname. If you're not sure, you can try logging in again using the 'wandb login --relogin --host [hostname]' command.(Error 401: Unauthorized)
+Traceback (most recent call last):
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\sdk\lib\retry.py", line 160, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\sdk\internal\internal_api.py", line 369, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\vendor\gql-0.2.0\wandb_gql\client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\vendor\gql-0.2.0\wandb_gql\client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\sdk\lib\gql_request.py", line 72, in execute
+    request.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\requests\models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://api.wandb.ai/graphql
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\sdk\internal\sender.py", line 942, in send_run
+    server_run = self._init_run(run, config_value_dict)
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\sdk\internal\sender.py", line 1013, in _init_run
+    server_run, inserted = self._api.upsert_run(
+                           ~~~~~~~~~~~~~~~~~~~~^
+        name=run.run_id,
+        ^^^^^^^^^^^^^^^^
+    ...<12 lines>...
+        commit=run.git.commit or None,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\apis\normalize.py", line 29, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\sdk\internal\internal_api.py", line 1921, in upsert_run
+    response = self.gql(
+        mutation,
+    ...<2 lines>...
+        **kwargs,
+    )
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\sdk\internal\internal_api.py", line 339, in gql
+    ret = self._retry_gql(
+        *args,
+        retry_cancel_event=self.context.cancel_event,
+        **kwargs,
+    )
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\sdk\lib\retry.py", line 163, in __call__
+    if not retry_loop.should_retry(e):
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\sdk\lib\retry.py", line 280, in should_retry
+    retry_check_result = self._retry_check(exception)
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\util.py", line 1065, in check_retry_fn
+    return fallback_retry_fn(e)
+  File "C:\Users\Alex\Documents\Proyecto_Nubes\.venv\Lib\site-packages\wandb\util.py", line 975, in no_retry_auth
+    raise AuthenticationError(
+    ...<6 lines>...
+    )
+wandb.errors.errors.AuthenticationError: The API key you provided is either invalid or missing.  If the `WANDB_API_KEY` environment variable is set, make sure it is correct. Otherwise, to resolve this issue, you may try running the 'wandb login --relogin' command. If you are using a local server, make sure that you're using the correct hostname. If you're not sure, you can try logging in again using the 'wandb login --relogin --host [hostname]' command.(Error 401: Unauthorized)
+2026-05-23 21:55:01 INFO saving file wandb-metadata.json with policy now
+2026-05-23 21:55:01 INFO saving file requirements.txt with policy now
+2026-05-23 21:55:01 INFO saving file wandb-metadata.json with policy now
+2026-05-23 21:55:01 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:55:01 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:55:01 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:55:01 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:55:01 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:55:01 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:55:01 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:55:01 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:55:01 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:55:01 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:55:01 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:55:01 INFO shutting down sender
+2026-05-23 21:58:29 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\run-pv4tsrq9.wandb
+2026-05-23 21:58:30 INFO watching files in: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files
+2026-05-23 21:58:30 INFO run started: pv4tsrq9 with start time 1779586891.846112
+2026-05-23 21:58:30 INFO saving file wandb-metadata.json with policy now
+2026-05-23 21:58:30 INFO saving file requirements.txt with policy now
+2026-05-23 21:58:31 INFO saving file wandb-metadata.json with policy now
+2026-05-23 21:58:31 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:58:31 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:58:31 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:58:31 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:58:31 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:58:31 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:58:31 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:58:31 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:58:31 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:58:31 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:58:31 INFO saving file wandb-summary.json with policy end
+2026-05-23 21:58:31 INFO shutting down sender
+2026-05-23 21:58:31 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files\wandb-summary.json
+2026-05-23 21:58:31 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files\wandb-metadata.json
+2026-05-23 21:58:31 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files\config.yaml
+2026-05-23 21:58:31 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files\output.log
+2026-05-23 21:58:31 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpp2yypyg_wandb\q3tvqykv-wandb-metadata.json
+2026-05-23 21:58:31 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpp2yypyg_wandb\m89yb0np-requirements.txt
+2026-05-23 21:58:32 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpp2yypyg_wandb\fog1hte8-wandb-metadata.json
+2026-05-23 21:58:33 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files\output.log
+2026-05-23 21:58:35 INFO shutting down directory watcher
+2026-05-23 21:58:35 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files\output.log
+2026-05-23 21:58:35 INFO scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files
+2026-05-23 21:58:35 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files\config.yaml config.yaml
+2026-05-23 21:58:35 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files\output.log output.log
+2026-05-23 21:58:35 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files\requirements.txt requirements.txt
+2026-05-23 21:58:35 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files\wandb-metadata.json wandb-metadata.json
+2026-05-23 21:58:35 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files\wandb-summary.json wandb-summary.json
+2026-05-23 21:58:35 INFO shutting down file pusher
+2026-05-23 21:58:35 INFO waiting for file pusher
+2026-05-23 21:58:35 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files\config.yaml
+2026-05-23 21:58:36 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files\output.log
+2026-05-23 21:58:36 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204129-pv4tsrq9\files\wandb-summary.json
+2026-05-23 21:58:36 INFO file stream finish called
+2026-05-23 21:58:37 INFO file stream finish is done
+2026-05-23 22:01:57 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\run-n5uv6l27.wandb
+2026-05-23 22:01:57 INFO watching files in: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files
+2026-05-23 22:01:57 INFO run started: n5uv6l27 with start time 1779587099.793046
+2026-05-23 22:01:57 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:01:57 INFO saving file requirements.txt with policy now
+2026-05-23 22:01:58 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:01:58 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:01:58 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:01:58 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:01:58 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:01:58 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:01:58 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:01:58 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:01:58 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:01:58 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:01:58 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:01:58 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:01:58 INFO shutting down sender
+2026-05-23 22:01:58 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpqa5i2iuvwandb\s98qiwno-wandb-metadata.json
+2026-05-23 22:01:58 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpqa5i2iuvwandb\7h58qcck-requirements.txt
+2026-05-23 22:01:58 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files\config.yaml
+2026-05-23 22:01:58 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files\wandb-summary.json
+2026-05-23 22:01:58 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files\wandb-metadata.json
+2026-05-23 22:01:58 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files\output.log
+2026-05-23 22:01:59 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpqa5i2iuvwandb\vl3sv3az-wandb-metadata.json
+2026-05-23 22:02:00 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files\output.log
+2026-05-23 22:02:02 INFO shutting down directory watcher
+2026-05-23 22:02:02 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files\output.log
+2026-05-23 22:02:02 INFO scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files
+2026-05-23 22:02:02 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files\config.yaml config.yaml
+2026-05-23 22:02:02 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files\output.log output.log
+2026-05-23 22:02:02 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files\requirements.txt requirements.txt
+2026-05-23 22:02:02 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files\wandb-metadata.json wandb-metadata.json
+2026-05-23 22:02:02 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files\wandb-summary.json wandb-summary.json
+2026-05-23 22:02:02 INFO shutting down file pusher
+2026-05-23 22:02:02 INFO waiting for file pusher
+2026-05-23 22:02:03 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files\wandb-summary.json
+2026-05-23 22:02:03 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files\config.yaml
+2026-05-23 22:02:03 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204459-n5uv6l27\files\output.log
+2026-05-23 22:02:03 INFO file stream finish called
+2026-05-23 22:02:04 INFO file stream finish is done
+2026-05-23 22:04:41 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\run-7zcex3ll.wandb
+2026-05-23 22:04:42 INFO watching files in: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files
+2026-05-23 22:04:42 INFO run started: 7zcex3ll with start time 1779582572.768897
+2026-05-23 22:04:42 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:04:42 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:04:42 INFO saving file requirements.txt with policy now
+2026-05-23 22:04:42 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:04:42 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:04:43 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:04:43 INFO shutting down sender
+2026-05-23 22:04:43 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmp9fbwdsf9wandb\gbkj7gup-wandb-metadata.json
+2026-05-23 22:04:43 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files\config.yaml
+2026-05-23 22:04:43 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files\wandb-summary.json
+2026-05-23 22:04:43 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files\output.log
+2026-05-23 22:04:43 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files\wandb-metadata.json
+2026-05-23 22:04:43 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmp9fbwdsf9wandb\pl3k4ofz-requirements.txt
+2026-05-23 22:04:43 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmp9fbwdsf9wandb\yxosxzdy-wandb-metadata.json
+2026-05-23 22:04:45 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files\output.log
+2026-05-23 22:04:46 INFO shutting down directory watcher
+2026-05-23 22:04:47 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files\output.log
+2026-05-23 22:04:47 INFO scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files
+2026-05-23 22:04:47 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files\config.yaml config.yaml
+2026-05-23 22:04:47 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files\output.log output.log
+2026-05-23 22:04:47 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files\requirements.txt requirements.txt
+2026-05-23 22:04:47 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files\wandb-metadata.json wandb-metadata.json
+2026-05-23 22:04:47 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files\wandb-summary.json wandb-summary.json
+2026-05-23 22:04:47 INFO shutting down file pusher
+2026-05-23 22:04:47 INFO waiting for file pusher
+2026-05-23 22:04:47 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files\output.log
+2026-05-23 22:04:47 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files\config.yaml
+2026-05-23 22:04:47 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192925-7zcex3ll\files\wandb-summary.json
+2026-05-23 22:04:48 INFO file stream finish called
+2026-05-23 22:04:48 INFO file stream finish is done
+2026-05-23 22:04:48 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\run-k67q674f.wandb
+2026-05-23 22:04:49 INFO watching files in: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files
+2026-05-23 22:04:49 INFO run started: k67q674f with start time 1779582591.514841
+2026-05-23 22:04:49 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:04:49 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:04:49 INFO saving file requirements.txt with policy now
+2026-05-23 22:04:49 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:04:49 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:04:50 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:04:50 INFO shutting down sender
+2026-05-23 22:04:50 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpken_c63cwandb\uwsm9mih-wandb-metadata.json
+2026-05-23 22:04:50 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files\config.yaml
+2026-05-23 22:04:50 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files\wandb-metadata.json
+2026-05-23 22:04:50 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files\wandb-summary.json
+2026-05-23 22:04:50 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files\output.log
+2026-05-23 22:04:50 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpken_c63cwandb\pvc557vh-requirements.txt
+2026-05-23 22:04:50 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpken_c63cwandb\nnnymuan-wandb-metadata.json
+2026-05-23 22:04:52 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files\output.log
+2026-05-23 22:04:53 INFO shutting down directory watcher
+2026-05-23 22:04:54 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files\output.log
+2026-05-23 22:04:54 INFO scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files
+2026-05-23 22:04:54 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files\config.yaml config.yaml
+2026-05-23 22:04:54 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files\output.log output.log
+2026-05-23 22:04:54 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files\requirements.txt requirements.txt
+2026-05-23 22:04:54 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files\wandb-metadata.json wandb-metadata.json
+2026-05-23 22:04:54 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files\wandb-summary.json wandb-summary.json
+2026-05-23 22:04:54 INFO shutting down file pusher
+2026-05-23 22:04:54 INFO waiting for file pusher
+2026-05-23 22:04:54 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files\output.log
+2026-05-23 22:04:54 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files\wandb-summary.json
+2026-05-23 22:04:54 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\files\config.yaml
+2026-05-23 22:04:55 INFO file stream finish called
+2026-05-23 22:04:56 INFO file stream finish is done
+2026-05-23 22:04:56 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193004-8xa6mr64\run-8xa6mr64.wandb
+2026-05-23 22:04:56 INFO watching files in: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193004-8xa6mr64\files
+2026-05-23 22:04:56 INFO run started: 8xa6mr64 with start time 1779582604.906383
+2026-05-23 22:04:56 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:04:57 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:04:57 INFO saving file requirements.txt with policy now
+2026-05-23 22:04:57 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpg9pizl96wandb\chr077fn-wandb-metadata.json
+2026-05-23 22:04:57 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpg9pizl96wandb\zit9aaln-requirements.txt
+2026-05-23 22:04:57 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193004-8xa6mr64\files\config.yaml
+2026-05-23 22:04:57 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193004-8xa6mr64\files\wandb-metadata.json
+2026-05-23 22:04:57 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpg9pizl96wandb\5vdhp6om-wandb-metadata.json
+2026-05-23 22:04:58 INFO Uploaded file C:\Users\Alex\AppData\Local\wandb\wandb\artifacts\staging\tmp0pqjpzfr
+2026-05-23 22:04:59 INFO sent artifact run-8xa6mr64-FinalF1Summary-PtsrNQ - {'id': 'QXJ0aWZhY3Q6Mjg3MjYwNDQzMA==', 'state': 'PENDING', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjEwNDQ4MzQ1NzM=', 'latestArtifact': None}}
+2026-05-23 22:04:59 INFO saving file media\table\Final F1 Summary_0_b05aaf107486dc458b64.table.json with policy now
+2026-05-23 22:04:59 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:04:59 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:04:59 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:04:59 INFO shutting down sender
+2026-05-23 22:04:59 INFO shutting down directory watcher
+2026-05-23 22:04:59 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpg9pizl96wandb\chubjxk7-media/table/Final F1 Summary_0_b05aaf107486dc458b64.table.json
+2026-05-23 22:04:59 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193004-8xa6mr64\files\config.yaml
+2026-05-23 22:04:59 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193004-8xa6mr64\files\wandb-summary.json
+2026-05-23 22:04:59 INFO scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193004-8xa6mr64\files
+2026-05-23 22:04:59 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193004-8xa6mr64\files\config.yaml config.yaml
+2026-05-23 22:04:59 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193004-8xa6mr64\files\requirements.txt requirements.txt
+2026-05-23 22:04:59 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193004-8xa6mr64\files\wandb-metadata.json wandb-metadata.json
+2026-05-23 22:04:59 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193004-8xa6mr64\files\wandb-summary.json wandb-summary.json
+2026-05-23 22:04:59 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193004-8xa6mr64\files\media\table\Final F1 Summary_0_b05aaf107486dc458b64.table.json media/table/Final F1 Summary_0_b05aaf107486dc458b64.table.json
+2026-05-23 22:04:59 INFO shutting down file pusher
+2026-05-23 22:04:59 INFO waiting for file pusher
+2026-05-23 22:05:00 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193004-8xa6mr64\files\wandb-summary.json
+2026-05-23 22:05:00 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193004-8xa6mr64\files\config.yaml
+2026-05-23 22:05:00 INFO file stream finish called
+2026-05-23 22:05:01 INFO file stream finish is done
+2026-05-23 22:05:01 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\run-blojqhgv.wandb
+2026-05-23 22:05:01 INFO watching files in: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\files
+2026-05-23 22:05:01 INFO run started: blojqhgv with start time 1779582697.043523
+2026-05-23 22:05:01 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:05:01 INFO saving file requirements.txt with policy now
+2026-05-23 22:05:02 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:05:02 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:02 INFO shutting down sender
+2026-05-23 22:05:02 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmppz803zkxwandb\z38ngbn5-requirements.txt
+2026-05-23 22:05:02 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmppz803zkxwandb\66tymtr1-wandb-metadata.json
+2026-05-23 22:05:02 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\files\config.yaml
+2026-05-23 22:05:02 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\files\wandb-metadata.json
+2026-05-23 22:05:02 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\files\wandb-summary.json
+2026-05-23 22:05:02 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\files\output.log
+2026-05-23 22:05:03 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmppz803zkxwandb\ifmhup4j-wandb-metadata.json
+2026-05-23 22:05:04 INFO shutting down directory watcher
+2026-05-23 22:05:04 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\files\output.log
+2026-05-23 22:05:04 INFO scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\files
+2026-05-23 22:05:04 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\files\config.yaml config.yaml
+2026-05-23 22:05:04 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\files\output.log output.log
+2026-05-23 22:05:04 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\files\requirements.txt requirements.txt
+2026-05-23 22:05:04 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\files\wandb-metadata.json wandb-metadata.json
+2026-05-23 22:05:04 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\files\wandb-summary.json wandb-summary.json
+2026-05-23 22:05:04 INFO shutting down file pusher
+2026-05-23 22:05:04 INFO waiting for file pusher
+2026-05-23 22:05:05 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\files\config.yaml
+2026-05-23 22:05:05 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\files\wandb-summary.json
+2026-05-23 22:05:05 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193133-blojqhgv\files\output.log
+2026-05-23 22:05:05 INFO file stream finish called
+2026-05-23 22:05:06 INFO file stream finish is done
+2026-05-23 22:05:06 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\run-frmc9zke.wandb
+2026-05-23 22:05:06 INFO watching files in: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files
+2026-05-23 22:05:06 INFO run started: frmc9zke with start time 1779582822.364929
+2026-05-23 22:05:07 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:05:07 INFO saving file requirements.txt with policy now
+2026-05-23 22:05:07 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:05:07 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:07 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:07 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:07 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:07 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:07 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:07 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:07 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:07 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:07 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:07 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmp0uo91qqhwandb\qp9od10b-wandb-metadata.json
+2026-05-23 22:05:07 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmp0uo91qqhwandb\pxqaszjm-requirements.txt
+2026-05-23 22:05:07 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:07 INFO shutting down sender
+2026-05-23 22:05:07 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files\config.yaml
+2026-05-23 22:05:07 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files\wandb-metadata.json
+2026-05-23 22:05:07 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files\wandb-summary.json
+2026-05-23 22:05:07 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files\output.log
+2026-05-23 22:05:07 WARNING Terminal output too large. Logging without processing.
+2026-05-23 22:05:08 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmp0uo91qqhwandb\wl5ikl1m-wandb-metadata.json
+2026-05-23 22:05:08 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files\output.log
+2026-05-23 22:05:09 INFO shutting down directory watcher
+2026-05-23 22:05:09 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files\output.log
+2026-05-23 22:05:09 INFO scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files
+2026-05-23 22:05:09 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files\config.yaml config.yaml
+2026-05-23 22:05:09 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files\output.log output.log
+2026-05-23 22:05:09 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files\requirements.txt requirements.txt
+2026-05-23 22:05:09 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files\wandb-metadata.json wandb-metadata.json
+2026-05-23 22:05:09 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files\wandb-summary.json wandb-summary.json
+2026-05-23 22:05:09 INFO shutting down file pusher
+2026-05-23 22:05:09 INFO waiting for file pusher
+2026-05-23 22:05:10 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files\output.log
+2026-05-23 22:05:10 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files\config.yaml
+2026-05-23 22:05:10 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_193339-frmc9zke\files\wandb-summary.json
+2026-05-23 22:05:10 INFO file stream finish called
+2026-05-23 22:05:11 INFO file stream finish is done
+2026-05-23 22:05:11 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\run-qgwsn9px.wandb
+2026-05-23 22:05:12 INFO watching files in: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files
+2026-05-23 22:05:12 INFO run started: qgwsn9px with start time 1779583362.02861
+2026-05-23 22:05:12 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:05:12 INFO saving file requirements.txt with policy now
+2026-05-23 22:05:12 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:05:12 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:12 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:12 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:12 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:12 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:12 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:12 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:12 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:12 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:12 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:12 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpaza8w4imwandb\nt1b8j32-requirements.txt
+2026-05-23 22:05:12 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:12 INFO shutting down sender
+2026-05-23 22:05:12 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpaza8w4imwandb\b6wffjjk-wandb-metadata.json
+2026-05-23 22:05:13 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files\config.yaml
+2026-05-23 22:05:13 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files\wandb-summary.json
+2026-05-23 22:05:13 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files\output.log
+2026-05-23 22:05:13 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files\wandb-metadata.json
+2026-05-23 22:05:13 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpaza8w4imwandb\k7m4v0pm-wandb-metadata.json
+2026-05-23 22:05:15 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files\output.log
+2026-05-23 22:05:16 INFO shutting down directory watcher
+2026-05-23 22:05:17 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files\output.log
+2026-05-23 22:05:17 INFO scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files
+2026-05-23 22:05:17 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files\config.yaml config.yaml
+2026-05-23 22:05:17 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files\output.log output.log
+2026-05-23 22:05:17 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files\requirements.txt requirements.txt
+2026-05-23 22:05:17 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files\wandb-metadata.json wandb-metadata.json
+2026-05-23 22:05:17 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files\wandb-summary.json wandb-summary.json
+2026-05-23 22:05:17 INFO shutting down file pusher
+2026-05-23 22:05:17 INFO waiting for file pusher
+2026-05-23 22:05:17 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files\config.yaml
+2026-05-23 22:05:17 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files\wandb-summary.json
+2026-05-23 22:05:17 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_194241-qgwsn9px\files\output.log
+2026-05-23 22:05:18 INFO file stream finish called
+2026-05-23 22:05:18 INFO file stream finish is done
+2026-05-23 22:05:18 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_195133-tcn1c30r\run-tcn1c30r.wandb
+2026-05-23 22:05:19 INFO watching files in: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_195133-tcn1c30r\files
+2026-05-23 22:05:19 INFO run started: tcn1c30r with start time 1779583893.712905
+2026-05-23 22:05:19 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:05:19 INFO saving file requirements.txt with policy now
+2026-05-23 22:05:19 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:05:19 INFO shutting down sender
+2026-05-23 22:05:20 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpt7avz5ibwandb\1qutcbmv-requirements.txt
+2026-05-23 22:05:20 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpt7avz5ibwandb\bqubatlt-wandb-metadata.json
+2026-05-23 22:05:20 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_195133-tcn1c30r\files\config.yaml
+2026-05-23 22:05:20 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_195133-tcn1c30r\files\output.log
+2026-05-23 22:05:20 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_195133-tcn1c30r\files\wandb-metadata.json
+2026-05-23 22:05:20 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpt7avz5ibwandb\j09fyo0a-wandb-metadata.json
+2026-05-23 22:05:21 INFO shutting down directory watcher
+2026-05-23 22:05:22 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_195133-tcn1c30r\files\output.log
+2026-05-23 22:05:22 INFO scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_195133-tcn1c30r\files
+2026-05-23 22:05:22 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_195133-tcn1c30r\files\config.yaml config.yaml
+2026-05-23 22:05:22 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_195133-tcn1c30r\files\output.log output.log
+2026-05-23 22:05:22 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_195133-tcn1c30r\files\requirements.txt requirements.txt
+2026-05-23 22:05:22 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_195133-tcn1c30r\files\wandb-metadata.json wandb-metadata.json
+2026-05-23 22:05:22 INFO shutting down file pusher
+2026-05-23 22:05:22 INFO waiting for file pusher
+2026-05-23 22:05:22 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_195133-tcn1c30r\files\output.log
+2026-05-23 22:05:22 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_195133-tcn1c30r\files\config.yaml
+2026-05-23 22:05:23 INFO file stream finish called
+2026-05-23 22:05:24 INFO file stream finish is done
+2026-05-23 22:05:24 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203522-tf3x2t1x\run-tf3x2t1x.wandb
+2026-05-23 22:05:24 INFO shutting down sender
+2026-05-23 22:05:24 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\run-2e399f4e.wandb
+2026-05-23 22:05:24 INFO watching files in: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\files
+2026-05-23 22:05:24 INFO run started: 2e399f4e with start time 1779586586.222152
+2026-05-23 22:05:24 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:05:24 INFO saving file requirements.txt with policy now
+2026-05-23 22:05:25 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:05:25 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:25 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:25 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:25 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:25 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:25 INFO shutting down sender
+2026-05-23 22:05:25 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmphmao4wkgwandb\yh56lbjk-requirements.txt
+2026-05-23 22:05:25 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmphmao4wkgwandb\rubx5nc2-wandb-metadata.json
+2026-05-23 22:05:25 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\files\config.yaml
+2026-05-23 22:05:25 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\files\wandb-summary.json
+2026-05-23 22:05:25 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\files\wandb-metadata.json
+2026-05-23 22:05:25 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\files\output.log
+2026-05-23 22:05:25 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmphmao4wkgwandb\wcfjjnhu-wandb-metadata.json
+2026-05-23 22:05:27 INFO shutting down directory watcher
+2026-05-23 22:05:27 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\files\output.log
+2026-05-23 22:05:27 INFO scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\files
+2026-05-23 22:05:27 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\files\config.yaml config.yaml
+2026-05-23 22:05:27 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\files\output.log output.log
+2026-05-23 22:05:27 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\files\requirements.txt requirements.txt
+2026-05-23 22:05:27 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\files\wandb-metadata.json wandb-metadata.json
+2026-05-23 22:05:27 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\files\wandb-summary.json wandb-summary.json
+2026-05-23 22:05:27 INFO shutting down file pusher
+2026-05-23 22:05:27 INFO waiting for file pusher
+2026-05-23 22:05:28 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\files\config.yaml
+2026-05-23 22:05:28 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\files\output.log
+2026-05-23 22:05:28 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_203623-2e399f4e\files\wandb-summary.json
+2026-05-23 22:05:28 INFO file stream finish called
+2026-05-23 22:05:29 INFO file stream finish is done
+2026-05-23 22:05:29 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\run-9dqsdstz.wandb
+2026-05-23 22:05:29 INFO watching files in: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files
+2026-05-23 22:05:29 INFO run started: 9dqsdstz with start time 1779587262.394345
+2026-05-23 22:05:30 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:05:30 INFO saving file requirements.txt with policy now
+2026-05-23 22:05:30 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:05:30 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:30 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:30 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:30 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:30 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:30 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:30 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:30 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:30 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:30 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:30 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:30 INFO shutting down sender
+2026-05-23 22:05:30 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmp0poegs8swandb\ycn5oozm-wandb-metadata.json
+2026-05-23 22:05:30 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmp0poegs8swandb\npjjp6r7-requirements.txt
+2026-05-23 22:05:30 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files\config.yaml
+2026-05-23 22:05:30 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files\wandb-metadata.json
+2026-05-23 22:05:30 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files\wandb-summary.json
+2026-05-23 22:05:30 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files\output.log
+2026-05-23 22:05:31 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmp0poegs8swandb\m5z3dqg1-wandb-metadata.json
+2026-05-23 22:05:32 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files\output.log
+2026-05-23 22:05:34 INFO shutting down directory watcher
+2026-05-23 22:05:34 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files\output.log
+2026-05-23 22:05:34 INFO scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files
+2026-05-23 22:05:34 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files\config.yaml config.yaml
+2026-05-23 22:05:34 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files\output.log output.log
+2026-05-23 22:05:34 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files\requirements.txt requirements.txt
+2026-05-23 22:05:34 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files\wandb-metadata.json wandb-metadata.json
+2026-05-23 22:05:34 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files\wandb-summary.json wandb-summary.json
+2026-05-23 22:05:34 INFO shutting down file pusher
+2026-05-23 22:05:34 INFO waiting for file pusher
+2026-05-23 22:05:35 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files\wandb-summary.json
+2026-05-23 22:05:35 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files\config.yaml
+2026-05-23 22:05:35 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_204742-9dqsdstz\files\output.log
+2026-05-23 22:05:35 INFO file stream finish called
+2026-05-23 22:05:36 INFO file stream finish is done
+2026-05-23 22:05:36 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\run-30uuc9bj.wandb
+2026-05-23 22:05:37 INFO watching files in: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files
+2026-05-23 22:05:37 INFO run started: 30uuc9bj with start time 1779588203.808174
+2026-05-23 22:05:37 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:05:37 INFO saving file requirements.txt with policy now
+2026-05-23 22:05:37 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:05:37 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:37 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:37 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:37 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:37 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:37 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:37 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:37 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:37 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:37 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:38 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpf8x3pdpawandb\sonvv6c7-requirements.txt
+2026-05-23 22:05:38 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpf8x3pdpawandb\9mpc253d-wandb-metadata.json
+2026-05-23 22:05:38 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:38 INFO shutting down sender
+2026-05-23 22:05:38 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files\config.yaml
+2026-05-23 22:05:38 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files\wandb-metadata.json
+2026-05-23 22:05:38 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files\output.log
+2026-05-23 22:05:38 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files\wandb-summary.json
+2026-05-23 22:05:38 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpf8x3pdpawandb\ltiorxky-wandb-metadata.json
+2026-05-23 22:05:40 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files\output.log
+2026-05-23 22:05:41 INFO shutting down directory watcher
+2026-05-23 22:05:42 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files\output.log
+2026-05-23 22:05:42 INFO scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files
+2026-05-23 22:05:42 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files\config.yaml config.yaml
+2026-05-23 22:05:42 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files\output.log output.log
+2026-05-23 22:05:42 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files\requirements.txt requirements.txt
+2026-05-23 22:05:42 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files\wandb-metadata.json wandb-metadata.json
+2026-05-23 22:05:42 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files\wandb-summary.json wandb-summary.json
+2026-05-23 22:05:42 INFO shutting down file pusher
+2026-05-23 22:05:42 INFO waiting for file pusher
+2026-05-23 22:05:42 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files\config.yaml
+2026-05-23 22:05:42 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files\wandb-summary.json
+2026-05-23 22:05:42 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_210323-30uuc9bj\files\output.log
+2026-05-23 22:05:43 INFO file stream finish called
+2026-05-23 22:05:44 INFO file stream finish is done
+2026-05-23 22:05:44 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_211513-qo33zea5\run-qo33zea5.wandb
+2026-05-23 22:05:44 INFO watching files in: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_211513-qo33zea5\files
+2026-05-23 22:05:44 INFO run started: qo33zea5 with start time 1779588913.795221
+2026-05-23 22:05:44 INFO saving file wandb-metadata.json with policy now
+2026-05-23 22:05:44 INFO saving file requirements.txt with policy now
+2026-05-23 22:05:45 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpfm6gcurzwandb\dy6uk7nt-requirements.txt
+2026-05-23 22:05:45 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpfm6gcurzwandb\i0jzhcxp-wandb-metadata.json
+2026-05-23 22:05:45 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_211513-qo33zea5\files\config.yaml
+2026-05-23 22:05:45 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_211513-qo33zea5\files\wandb-metadata.json
+2026-05-23 22:05:45 INFO Uploaded file C:\Users\Alex\AppData\Local\wandb\wandb\artifacts\staging\tmplpjsu9yi
+2026-05-23 22:05:46 INFO sent artifact run-qo33zea5-CVSummary-Qy-23g - {'id': 'QXJ0aWZhY3Q6Mjg3MjYwNjY3Nw==', 'state': 'PENDING', 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjEwNDQ4MzU0MjU=', 'latestArtifact': None}}
+2026-05-23 22:05:46 INFO saving file media\table\CV Summary_0_d641578575bcc3bcb4b7.table.json with policy now
+2026-05-23 22:05:46 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:46 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:46 INFO saving file wandb-summary.json with policy end
+2026-05-23 22:05:46 INFO shutting down sender
+2026-05-23 22:05:46 INFO shutting down directory watcher
+2026-05-23 22:05:47 INFO Uploaded file C:\Users\Alex\AppData\Local\Temp\tmpfm6gcurzwandb\i4ra06v3-media/table/CV Summary_0_d641578575bcc3bcb4b7.table.json
+2026-05-23 22:05:47 INFO file/dir modified: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_211513-qo33zea5\files\config.yaml
+2026-05-23 22:05:47 INFO file/dir created: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_211513-qo33zea5\files\wandb-summary.json
+2026-05-23 22:05:47 INFO scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_211513-qo33zea5\files
+2026-05-23 22:05:47 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_211513-qo33zea5\files\config.yaml config.yaml
+2026-05-23 22:05:47 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_211513-qo33zea5\files\requirements.txt requirements.txt
+2026-05-23 22:05:47 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_211513-qo33zea5\files\wandb-metadata.json wandb-metadata.json
+2026-05-23 22:05:47 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_211513-qo33zea5\files\wandb-summary.json wandb-summary.json
+2026-05-23 22:05:47 INFO scan save: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_211513-qo33zea5\files\media\table\CV Summary_0_d641578575bcc3bcb4b7.table.json media/table/CV Summary_0_d641578575bcc3bcb4b7.table.json
+2026-05-23 22:05:47 INFO shutting down file pusher
+2026-05-23 22:05:47 INFO waiting for file pusher
+2026-05-23 22:05:48 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_211513-qo33zea5\files\config.yaml
+2026-05-23 22:05:48 INFO Uploaded file C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_211513-qo33zea5\files\wandb-summary.json
+2026-05-23 22:05:48 INFO file stream finish called
+2026-05-23 22:05:49 INFO file stream finish is done
+2026-05-23 22:05:49 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_215012-2l9s1yi9\run-2l9s1yi9.wandb
+2026-05-23 22:05:49 INFO shutting down sender
+2026-05-23 22:05:49 INFO open for scan: C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_215113-y7vtf21f\run-y7vtf21f.wandb
+2026-05-23 22:05:49 INFO shutting down sender

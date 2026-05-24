@@ -1,0 +1,24 @@
+Epoch 1/5
+  Train Loss: 0.7119 | Val Loss: 0.6381
+  F1 Macro:  0.7012  | F1 Weighted: 0.7105
+  Tiempo:    train 50.6s | val 26.6s | total 77.3s
+  ✓ Nuevo mejor F1 (0.7012) - checkpoint guardado: best_model_MobileNetV3_fold2.pth
+Epoch 2/5
+  Train Loss: 0.6060 | Val Loss: 0.6258
+  F1 Macro:  0.6812  | F1 Weighted: 0.6869
+  Tiempo:    train 9.9s | val 11.2s | total 21.1s
+Epoch 3/5
+  Train Loss: 0.5531 | Val Loss: 0.5766
+  F1 Macro:  0.7428  | F1 Weighted: 0.7482
+  Tiempo:    train 9.4s | val 11.2s | total 20.6s
+  ✓ Nuevo mejor F1 (0.7428) - checkpoint guardado: best_model_MobileNetV3_fold2.pth
+Epoch 4/5
+  Train Loss: 0.5176 | Val Loss: 0.5784
+  F1 Macro:  0.7521  | F1 Weighted: 0.7570
+  Tiempo:    train 9.3s | val 11.1s | total 20.4s
+  ✓ Nuevo mejor F1 (0.7521) - checkpoint guardado: best_model_MobileNetV3_fold2.pth
+Epoch 5/5
+  Train Loss: 0.5049 | Val Loss: 0.5572
+  F1 Macro:  0.7349  | F1 Weighted: 0.7412
+  Tiempo:    train 9.3s | val 11.1s | total 20.4s
+  Fold 2 completado en 2.7 min — Mejor F1: 0.7521

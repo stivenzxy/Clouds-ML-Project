@@ -1,0 +1,30 @@
+Epoch 1/5
+Train Loss: 0.6796 | Val Loss: 0.5958
+F1 Macro: 0.7169 | F1 Weighted: 0.7194
+Mejor modelo (F1: 0.7169) guardado en best_model_MobileNet3_fold2.pth
+Epoch 2/5
+Train Loss: 0.5762 | Val Loss: 0.6004
+F1 Macro: 0.7430 | F1 Weighted: 0.7486
+Mejor modelo (F1: 0.7430) guardado en best_model_MobileNet3_fold2.pth
+Epoch 3/5
+Train Loss: 0.5456 | Val Loss: 0.5439
+F1 Macro: 0.7431 | F1 Weighted: 0.7477
+Mejor modelo (F1: 0.7431) guardado en best_model_MobileNet3_fold2.pth
+Epoch 4/5
+Train Loss: 0.5118 | Val Loss: 0.5411
+F1 Macro: 0.7559 | F1 Weighted: 0.7588
+Mejor modelo (F1: 0.7559) guardado en best_model_MobileNet3_fold2.pth
+Epoch 5/5
+Train Loss: 0.4977 | Val Loss: 0.5411
+F1 Macro: 0.7612 | F1 Weighted: 0.7648
+Mejor modelo (F1: 0.7612) guardado en best_model_MobileNet3_fold2.pth
+Training: 100%|██████████| 174/174 [01:07<00:00,  2.57it/s]
+Validation: 100%|██████████| 174/174 [00:41<00:00,  4.23it/s]
+Training: 100%|██████████| 174/174 [01:05<00:00,  2.66it/s]
+Validation: 100%|██████████| 174/174 [00:39<00:00,  4.44it/s]
+Training: 100%|██████████| 174/174 [01:06<00:00,  2.63it/s]
+Validation: 100%|██████████| 174/174 [00:39<00:00,  4.39it/s]
+Training: 100%|██████████| 174/174 [01:03<00:00,  2.74it/s]
+Validation: 100%|██████████| 174/174 [00:41<00:00,  4.24it/s]
+Training: 100%|██████████| 174/174 [01:06<00:00,  2.63it/s]
+Validation: 100%|██████████| 174/174 [00:41<00:00,  4.24it/s]
