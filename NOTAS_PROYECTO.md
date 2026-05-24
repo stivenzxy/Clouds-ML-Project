@@ -287,16 +287,132 @@ Los primeros 10-30 segundos al iniciar van a parecer "colgados" → los 6 worker
 ## 🔜 Pendientes inmediatos
 
 1. ✅ Crear este documento de notas.
-2. 🔲 Aplicar correcciones al código:
-   - Cambiar `train_multilabel.csv` → `train_split.csv` en CV.
-   - Borrar `self.activation` zombie en `model.py`.
-   - Optimizar DataLoader (workers, pin_memory, persistent_workers).
-   - Agregar Mixed Precision (AMP).
-   - Reordenar augmentations (Resize primero).
-   - Agregar semillas globales.
-   - Quitar `OMP_NUM_THREADS=1`.
-3. 🔲 Reentrenar CV con código corregido.
-4. 🔲 Avanzar a punto C: modelo final + métricas en val + matriz de confusión.
-5. 🔲 Punto D: análisis cualitativo de 5 aciertos + 5 errores.
-6. 🔲 Punto E: artículo LNCS.
-7. 🔲 Punto F: interfaz.
+2. ✅ Aplicar correcciones al código:
+   - ✅ Cambiar `train_multilabel.csv` → `train_split.csv` en CV.
+   - ✅ Borrar `self.activation` zombie en `model.py`.
+   - ✅ Optimizar DataLoader (workers, pin_memory, persistent_workers).
+   - ✅ Agregar Mixed Precision (AMP).
+   - ✅ Reordenar augmentations (Resize primero).
+   - ✅ Agregar semillas globales.
+   - ✅ Quitar `OMP_NUM_THREADS=1`.
+3. ✅ Reentrenar CV con código corregido.
+4. ✅ Punto B completo (resultados abajo).
+5. 🔲 Punto C: modelo final + métricas en val + matriz de confusión.
+6. 🔲 Punto D: análisis cualitativo de 5 aciertos + 5 errores.
+7. 🔲 Punto E: artículo LNCS.
+8. 🔲 Punto F: interfaz.
+
+---
+
+## 📊 Resultados del Punto B
+
+Validación cruzada estratificada multi-etiqueta de 2 folds sobre `train_split.csv` (70% del dataset).
+
+| Arquitectura | F1 Macro (media ± std) | Fold 1 | Fold 2 |
+|--------------|------------------------|--------|--------|
+| MobileNetV3    | 0.7476 ± 0.0046 | 0.7430 | 0.7521 |
+| **DenseNet121** | **0.7542 ± 0.0040** | 0.7582 | 0.7502 |
+
+**Conclusión**: DenseNet121 gana por ~0.7 puntos de F1 macro y con menor desviación estándar entre folds (más estable). Ambas arquitecturas están en el rango competitivo del problema (~0.65–0.75 F1 macro según la competencia original de Kaggle).
+
+**Mejor arquitectura → DenseNet121** será la usada en el modelo final del punto C.
+
+CSV exportado: `wandb_export_2026-05-23T22_11_28.862-05_00.csv`
+
+### Sobre los runs de W&B
+
+Los runs se guardaron en modo **offline** en `wandb/offline-run-*/`. Para subirlos al dashboard de wandb.ai y poder mostrar capturas de las curvas en el paper:
+
+```powershell
+wandb sync wandb/offline-run-*
+```
+
+Esto sube los logs de cada fold (train_loss, val_loss, f1_macro, f1_weighted, lr, epoch_time) y genera un link público al proyecto.
+
+---
+
+## ⚠️ Aclaración importante: dos cosas que se llaman "val"
+
+Confusión común con la nomenclatura. Son DOS cosas distintas:
+
+### 1. `val_split.csv` (en disco, generado en preprocesamiento)
+- Es el **15%** del dataset separado en el punto A.
+- **Está intocado.** No se cargó nunca durante la CV del punto B.
+- Reservado para el **punto C** (evaluar el modelo final).
+
+### 2. `val_loss` que aparece en W&B durante la CV
+- Es OTRA cosa. Es la pérdida sobre la **mitad del propio `train_split.csv`** que se usa como validación dentro de cada fold de la CV.
+- En `MultilabelStratifiedKFold(n_splits=2)` el 70% se parte en 2 mitades:
+  - Fold 1: mitad A entrena → mitad B valida
+  - Fold 2: mitad B entrena → mitad A valida
+- Esa "val" cambia en cada fold y es interna a la CV.
+
+**Resumen de los 3 splits:**
+
+| CSV | % dataset | ¿Usado en B? | Reservado para |
+|-----|-----------|--------------|----------------|
+| `train_split.csv` | 70% | ✅ Sí (CV completa) | Modelo final (C) |
+| `val_split.csv` | 15% | ❌ Intocado | Evaluación del modelo final (C) |
+| `test_split.csv` | 15% | ❌ Intocado | 5 aciertos + 5 errores (D) |
+
+---
+
+## 🎯 Punto C — Plan y decisiones
+
+### Objetivo
+Entrenar UN modelo final de DenseNet121 sobre todo `train_split.csv`, evaluarlo en `val_split.csv` (intocado), y reportar **por cada clase de nube**:
+
+- **Exactitud por etiqueta** (Accuracy binaria por clase)
+- **Precisión** (Precision)
+- **Exhaustividad** (Recall)
+- **F1-score**
+- **Matriz de confusión** (una 2×2 por cada clase)
+
+### Decisiones de diseño
+
+#### Arquitectura: DenseNet121
+Ganador de la CV con F1 macro = 0.7542 ± 0.0040, mejor que MobileNetV3 (0.7476 ± 0.0046) tanto en media como en estabilidad.
+
+#### Número de epochs: 25 (con early stopping)
+En la CV del punto B se usaron 5 epochs y el modelo seguía aprendiendo (train y val loss bajando, F1 subiendo). Para el modelo final tiene sentido entrenar más tiempo, ya que:
+- No es un experimento comparativo (no necesitamos repetir 4 veces).
+- Buscamos el mejor F1 posible.
+- Tenemos cómputo de sobra (con AMP cada epoch tarda ~30s).
+
+**Early stopping** con `patience=5`: si la métrica de validación (F1 macro) no mejora durante 5 epochs seguidas, corta el entrenamiento. Evita overfitting y desperdicio de cómputo.
+
+#### Scheduler: CosineAnnealingLR
+Reduce el learning rate de forma suave siguiendo una curva coseno desde 1e-4 hasta ~1e-6 a lo largo de los 25 epochs.
+
+**Por qué `CosineAnnealing` y no `ReduceLROnPlateau`:**
+- No tiene hiperparámetros que ajustar (factor, patience). Plug & play.
+- La reducción gradual permite "afinar" el modelo al final del entrenamiento (lr bajo = pasos más pequeños = ajustes más finos).
+- Empíricamente da mejores resultados que LR fijo en transfer learning sobre datasets medianos.
+
+#### Conjuntos
+- **Entrenamiento**: `train_split.csv` completo (70%, ~3856 imágenes).
+- **Validación**: `val_split.csv` completo (15%, ~826 imágenes), evaluado al final de cada epoch.
+
+#### Modelo guardado
+Se guarda el checkpoint del epoch con mejor **F1 macro en validación**, no del último epoch.
+
+### Estimación de tiempo
+- 25 epochs × ~30s = ~12-15 minutos para el entrenamiento.
+- Evaluación final + matrices de confusión: ~30 segundos.
+- **Total Punto C: ~15-20 minutos**.
+
+### Argumentos para el informe
+
+> *"Tras la validación cruzada del punto B, DenseNet-121 se seleccionó como arquitectura final por presentar el mayor F1-score macro promedio (0.7542 ± 0.0040) y la menor variabilidad entre folds, lo que indica mayor estabilidad. El modelo final se entrenó durante 25 épocas sobre el conjunto de entrenamiento completo, con un planificador de tasa de aprendizaje CosineAnnealingLR que reduce el LR de 1×10⁻⁴ a aproximadamente 1×10⁻⁶ siguiendo una curva coseno. Se aplicó early stopping (paciencia = 5) sobre el F1-score macro de validación para evitar sobreajuste. El checkpoint del modelo correspondiente a la mejor métrica de validación fue retenido para la evaluación final."*
+
+### Métricas a reportar (definiciones para el paper)
+
+Para cada clase k ∈ {Fish, Flower, Gravel, Sugar}:
+
+- **Exactitud (Accuracy)**: (TP + TN) / (TP + TN + FP + FN)
+- **Precisión (Precision)**: TP / (TP + FP) — de los que predije positivos, cuántos lo son.
+- **Exhaustividad (Recall)**: TP / (TP + FN) — de los positivos reales, cuántos atrapé.
+- **F1-score**: 2 · (Precision · Recall) / (Precision + Recall) — promedio armónico.
+- **Matriz de confusión 2×2**: [[TN, FP], [FN, TP]].
+
+---
