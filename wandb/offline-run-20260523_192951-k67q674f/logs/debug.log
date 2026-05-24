@@ -1,0 +1,20 @@
+2026-05-23 19:29:51,399 INFO    MainThread:13920 [wandb_init.py:setup_run_log_directory():723] Logging user logs to C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\logs\debug.log
+2026-05-23 19:29:51,399 INFO    MainThread:13920 [wandb_init.py:setup_run_log_directory():724] Logging internal logs to C:\Users\Alex\Documents\Proyecto_Nubes\wandb\offline-run-20260523_192951-k67q674f\logs\debug-internal.log
+2026-05-23 19:29:51,399 INFO    MainThread:13920 [wandb_init.py:init():851] calling init triggers
+2026-05-23 19:29:51,399 INFO    MainThread:13920 [wandb_init.py:init():856] wandb.init called with sweep_config: {}
+config: {'architecture': 'MobileNet3', 'fold': 2, 'learning_rate': 0.0001, 'epochs': 5, 'batch_size': 16, '_wandb': {}}
+2026-05-23 19:29:51,399 INFO    MainThread:13920 [wandb_init.py:init():899] starting backend
+2026-05-23 19:29:51,399 INFO    MainThread:13920 [wandb_init.py:init():914] sending inform_init request
+2026-05-23 19:29:51,514 INFO    MainThread:13920 [wandb_init.py:init():919] backend started and connected
+2026-05-23 19:29:51,516 INFO    MainThread:13920 [wandb_init.py:init():989] updated telemetry
+2026-05-23 19:29:51,555 INFO    MainThread:13920 [wandb_init.py:init():1012] communicating run to backend with 90.0 second timeout
+2026-05-23 19:29:51,557 INFO    MainThread:13920 [wandb_init.py:init():1057] starting run threads in backend
+2026-05-23 19:29:52,057 INFO    MainThread:13920 [wandb_run.py:_console_start():2509] atexit reg
+2026-05-23 19:29:52,058 INFO    MainThread:13920 [wandb_run.py:_redirect():2359] redirect: wrap_raw
+2026-05-23 19:29:52,058 INFO    MainThread:13920 [wandb_run.py:_redirect():2428] Wrapping output streams.
+2026-05-23 19:29:52,058 INFO    MainThread:13920 [wandb_run.py:_redirect():2451] Redirects installed.
+2026-05-23 19:29:52,058 INFO    MainThread:13920 [wandb_init.py:init():1095] run started, returning control to user process
+2026-05-23 19:30:04,784 INFO    MainThread:13920 [wandb_run.py:_finish():2271] finishing run proyecto-nubes/k67q674f
+2026-05-23 19:30:04,785 INFO    MainThread:13920 [wandb_run.py:_atexit_cleanup():2476] got exitcode: 0
+2026-05-23 19:30:04,785 INFO    MainThread:13920 [wandb_run.py:_restore():2458] restore
+2026-05-23 19:30:04,785 INFO    MainThread:13920 [wandb_run.py:_restore():2464] restore done
