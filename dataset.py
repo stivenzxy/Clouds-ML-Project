@@ -59,10 +59,10 @@ def get_train_transforms():
         A.Resize(IMG_HEIGHT, IMG_WIDTH),
         A.HorizontalFlip(p=0.5),
         A.VerticalFlip(p=0.5),
-        A.ShiftScaleRotate(
-            shift_limit=0.05,
-            scale_limit=0.10,
-            rotate_limit=15,
+        A.Affine(
+            translate_percent=(-0.05, 0.05),
+            scale=(0.90, 1.10),
+            rotate=(-15, 15),
             border_mode=cv2.BORDER_REFLECT_101,
             p=0.5,
         ),

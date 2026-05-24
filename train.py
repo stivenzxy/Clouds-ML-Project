@@ -33,7 +33,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
-from torch.cuda.amp import autocast, GradScaler
+from torch.amp import autocast, GradScaler
 from sklearn.metrics import f1_score
 from iterstrat.ml_stratifiers import MultilabelStratifiedKFold
 from tqdm import tqdm
@@ -70,7 +70,7 @@ def train_one_epoch(model, loader, criterion, optimizer, scaler, device):
         optimizer.zero_grad(set_to_none=True)
 
         # Mixed precision: forward en float16 donde sea seguro.
-        with autocast():
+        with autocast(device_type='cuda'):
             outputs = model(images)
             loss = criterion(outputs, labels)
 
@@ -95,7 +95,7 @@ def validate(model, loader, criterion, device):
         images = images.to(device, non_blocking=True)
         labels = labels.to(device, non_blocking=True)
 
-        with autocast():
+        with autocast(device_type='cuda'):
             outputs = model(images)
             loss = criterion(outputs, labels)
 
@@ -174,7 +174,7 @@ def main():
                     "amp": True,
                     "seed": SEED,
                 },
-                reinit=True,
+                reinit="finish_previous",
             )
 
             train_df = full_train_df.iloc[train_idx].reset_index(drop=True)
@@ -207,7 +207,7 @@ def main():
             model = get_model_fn(pretrained=True).to(device)
             criterion = nn.BCEWithLogitsLoss()
             optimizer = optim.Adam(model.parameters(), lr=learning_rate)
-            scaler = GradScaler()
+            scaler = GradScaler('cuda')
 
             best_f1_macro = 0.0
 
@@ -266,7 +266,7 @@ def main():
     print("=" * 60)
 
     # Reporte agregado en W&B.
-    wandb.init(project="proyecto-nubes", name="cv-summary", reinit=True)
+    wandb.init(project="proyecto-nubes", name="cv-summary", reinit="finish_previous")
     table = wandb.Table(columns=["Architecture", "F1 Macro Mean", "F1 Macro Std", "Fold 1", "Fold 2"])
     for res in results:
         table.add_data(
