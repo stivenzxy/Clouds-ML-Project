@@ -1,2 +1,30 @@
+# Datos (dataset original, demasiado pesado)
 /data
 
+# Modelos entrenados (.pth grandes, no caben en GitHub)
+*.pth
+/models/
+
+# Logs de Weights & Biases
+/wandb/
+
+# Cachés de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Notebooks / checkpoints
+.ipynb_checkpoints/
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
