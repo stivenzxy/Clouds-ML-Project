@@ -1,10 +1,6 @@
 # Datos (dataset original, demasiado pesado)
 /data
 
-# Modelos entrenados (.pth grandes, no caben en GitHub)
-*.pth
-/models/
-
 # Logs de Weights & Biases
 /wandb/
 
