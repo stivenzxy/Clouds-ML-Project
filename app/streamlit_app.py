@@ -65,7 +65,7 @@ def main() -> None:
 
     image_bytes = views.render_uploader()
     if image_bytes is None:
-        st.info('Esperando una imagen… o probá con el ejemplo precargado.')
+        st.info('Esperando una imagen… o prueba con el ejemplo precargado.')
         return
 
     image = Image.open(io.BytesIO(image_bytes))

@@ -56,7 +56,7 @@ def render_uploader() -> bytes | None:
 
     with col_upload:
         uploaded = st.file_uploader(
-            'Subí una imagen satelital',
+            'Sube una imagen satelital',
             type=['jpg', 'jpeg', 'png'],
             accept_multiple_files=False,
             label_visibility='collapsed',
@@ -156,7 +156,7 @@ def _render_meteo_panel(detected: tuple) -> None:
     if not detected:
         st.info(
             'No se detectó ningún patrón claro por encima del umbral. '
-            'Probá bajar el umbral en la barra lateral si querés ver la '
+            'Prueba bajar el umbral en la barra lateral si deseas ver la '
             'inclinación del modelo.'
         )
         return

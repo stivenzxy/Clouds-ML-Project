@@ -20,7 +20,7 @@ IMAGENET_STD = (0.229, 0.224, 0.225)
 # UI
 PAGE_TITLE = 'Clasificador de patrones de nubes'
 APP_DESCRIPTION = (
-    'Cargá una imagen satelital y el modelo predirá qué patrones de nubes '
+    'Carga una imagen satelital y el modelo predirá qué patrones de nubes '
     'están presentes. Los cuatro patrones (Rasp et al., 2020) corresponden a '
     'distintas formas de organización mesoescalar de la convección somera '
     'sobre el océano y se asocian a regímenes meteorológicos diferentes.'
