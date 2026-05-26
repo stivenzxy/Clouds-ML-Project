@@ -5,6 +5,9 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 # Modelo
 MODEL_PATH = PROJECT_ROOT / 'models' / 'best_model_final_DenseNet121.pth'
+
+# Imagen de ejemplo precargada (multi-etiqueta: Fish + Gravel + Sugar).
+DEMO_IMAGE_PATH = PROJECT_ROOT / 'app' / 'assets' / 'demo_example.jpg'
 CLASS_NAMES = ('Fish', 'Flower', 'Gravel', 'Sugar')
 DEFAULT_THRESHOLD = 0.5
 

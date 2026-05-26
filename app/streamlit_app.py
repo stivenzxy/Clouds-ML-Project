@@ -59,12 +59,11 @@ def main() -> None:
     threshold = views.render_sidebar(config.DEFAULT_THRESHOLD)
     views.render_header(config.PAGE_TITLE, config.APP_DESCRIPTION)
 
-    uploaded = views.render_uploader()
-    if uploaded is None:
-        st.info('Esperando una imagen…')
+    image_bytes = views.render_uploader()
+    if image_bytes is None:
+        st.info('Esperando una imagen… o probá con el ejemplo precargado.')
         return
 
-    image_bytes = uploaded.getvalue()
     image = Image.open(io.BytesIO(image_bytes))
 
     col_img, col_pred = st.columns(2)

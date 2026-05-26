@@ -42,12 +42,46 @@ def render_sidebar(default_threshold: float) -> float:
     return threshold
 
 
-def render_uploader():
-    return st.file_uploader(
-        'Subí una imagen satelital',
-        type=['jpg', 'jpeg', 'png'],
-        accept_multiple_files=False,
-    )
+def render_uploader() -> bytes | None:
+    """Devuelve los bytes de la imagen a procesar.
+
+    Soporta dos fuentes:
+    - Archivo subido por el usuario.
+    - Imagen de ejemplo precargada (botón en sidebar).
+
+    Usa session_state para que el ejemplo persista entre re-renders
+    (mover el slider del umbral no debe perderlo).
+    """
+    col_upload, col_demo = st.columns([3, 1])
+
+    with col_upload:
+        uploaded = st.file_uploader(
+            'Subí una imagen satelital',
+            type=['jpg', 'jpeg', 'png'],
+            accept_multiple_files=False,
+            label_visibility='collapsed',
+        )
+
+    with col_demo:
+        use_demo = st.button(
+            '🎲 Probar con ejemplo',
+            help='Carga una imagen del conjunto de test con varios patrones presentes.',
+            use_container_width=True,
+        )
+
+    # Si el usuario sube un archivo nuevo, ese gana y limpia el demo.
+    if uploaded is not None:
+        st.session_state.pop('demo_bytes', None)
+        return uploaded.getvalue()
+
+    # Si pidió el demo (o ya estaba cargado), devolverlo.
+    if use_demo or 'demo_bytes' in st.session_state:
+        if 'demo_bytes' not in st.session_state:
+            with open(config.DEMO_IMAGE_PATH, 'rb') as f:
+                st.session_state['demo_bytes'] = f.read()
+        return st.session_state['demo_bytes']
+
+    return None
 
 
 def render_image(image: Image.Image) -> None:
