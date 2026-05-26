@@ -1,31 +1,23 @@
-# Dependencias del proyecto.
-# Instalación:
-#   pip install -r requirements.txt
+# Dependencias mínimas para inferencia + demo Streamlit (deploy).
+# Para entrenar / reproducir experimentos, usar requirements-dev.txt.
 #
-# Para inferencia en laptop (punto F, sin GPU), usar PyTorch CPU:
-#   pip install torch --index-url https://download.pytorch.org/whl/cpu
-#   pip install -r requirements.txt --no-deps  (si ya está torch instalado)
+# Instalación local:
+#   pip install -r requirements.txt
 
-# --- Deep learning ---
-torch>=2.0
-torchvision>=0.15
-timm>=0.9                       # arquitecturas preentrenadas (DenseNet121, MobileNetV3)
+# PyTorch CPU (versión liviana para servidores sin GPU como Streamlit Cloud)
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.2.0
+torchvision==0.17.0
 
-# --- Procesamiento de imágenes ---
-albumentations>=1.3             # augmentations para train
-opencv-python>=4.7              # lectura/decodificación de imágenes
+# Arquitecturas preentrenadas (DenseNet121, MobileNetV3)
+timm>=0.9
 
-# --- Datos / numérica ---
+# Procesamiento de imágenes (la app solo usa PIL, no OpenCV)
+pillow>=10.0
+
+# Numérica
 numpy>=1.24
 pandas>=2.0
-scikit-learn>=1.3
-iterative-stratification>=0.1.7  # split estratificado multi-etiqueta (módulo: iterstrat)
 
-# --- Utilidades / logging ---
-tqdm>=4.65
-wandb>=0.16                     # tracking de experimentos (modo offline configurado)
-matplotlib>=3.7                 # figuras del paper y matrices de confusión
-
-# --- Interfaz demo (punto F) ---
-streamlit>=1.30                 # demo web local
-pillow>=10.0                    # PIL para manipulación de imágenes en Streamlit
+# Interfaz
+streamlit>=1.30
