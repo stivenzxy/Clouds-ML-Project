@@ -3,11 +3,15 @@
 #
 # Instalación local:
 #   pip install -r requirements.txt
+#
+# NOTA: Streamlit Cloud usa Python 3.14 por defecto, así que NO pineamos
+# versiones específicas de torch — dejamos que pip resuelva el wheel CPU
+# más nuevo compatible con la versión de Python del entorno.
 
-# PyTorch CPU (versión liviana para servidores sin GPU como Streamlit Cloud)
+# PyTorch CPU (wheels livianos, sin CUDA)
 --extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.2.0
-torchvision==0.17.0
+torch
+torchvision
 
 # Arquitecturas preentrenadas (DenseNet121, MobileNetV3)
 timm>=0.9
