@@ -42,8 +42,12 @@ def _build_preprocessor() -> ImagePreprocessor:
     )
 
 
-# cache_data por bytes de imagen: mover el slider del umbral NO re-corre el modelo.
-@st.cache_data(show_spinner='Analizando imagen...')
+# cache_resource (no pickle) por bytes de imagen: mover el slider del umbral
+# NO re-corre el modelo. Usamos cache_resource y no cache_data porque la clase
+# `Prediction` puede registrarse con doble identidad en sys.path en algunos
+# entornos (Streamlit Cloud agrega el dir del script, además del root que
+# añadimos arriba) y eso rompe el pickle de cache_data.
+@st.cache_resource(show_spinner='Analizando imagen...')
 def _predict_from_bytes(image_bytes: bytes) -> Prediction:
     image = Image.open(io.BytesIO(image_bytes))
     tensor = _build_preprocessor().to_tensor(image)

@@ -66,7 +66,7 @@ def render_uploader() -> bytes | None:
         use_demo = st.button(
             '🎲 Probar con ejemplo',
             help='Carga una imagen del conjunto de test con varios patrones presentes.',
-            use_container_width=True,
+            width='stretch',
         )
 
     # Si el usuario sube un archivo nuevo, ese gana y limpia el demo.
@@ -85,7 +85,7 @@ def render_uploader() -> bytes | None:
 
 
 def render_image(image: Image.Image) -> None:
-    st.image(image, caption='Imagen cargada', use_container_width=True)
+    st.image(image, caption='Imagen cargada', width='stretch')
 
 
 def _render_probability_card(name: str, prob: float, threshold: float) -> None:
